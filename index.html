@@ -3,220 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Server Hosting</title>
+    <title>Indian GTA Game</title>
     <style>
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f0f0;
         }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
+        #game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background: url('https://via.placeholder.com/800x600') no-repeat center center;
+            background-size: cover;
+            border: 2px solid #000;
         }
-        #main-header {
-            background-color: #333;
-            color: #fff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #77b300 3px solid;
+        #player {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('https://via.placeholder.com/50') no-repeat center center;
+            background-size: contain;
         }
-        #main-header h1 {
-            text-align: center;
-            text-transform: uppercase;
-            margin: 0;
-            font-size: 24px;
-        }
-        .button {
-            display: inline-block;
-            color: #fff;
-            background: #333;
-            padding: 10px 20px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .button:hover {
-            background: #77b300;
-        }
-        #login, #register, #dashboard, #server-panel {
-            display: none;
-        }
-        .form-group {
-            margin: 15px 0;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
+        #task {
+            position: absolute;
+            top: 10px;
+            left: 10px;
             padding: 10px;
-            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #000;
+            font-size: 18px;
         }
-        .server-options {
-            margin-top: 20px;
-        }
-        .server-options button {
-            margin: 5px;
+        #auto-rickshaw {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: url('https://via.placeholder.com/60') no-repeat center center;
+            background-size: contain;
+            top: 400px;
+            left: 600px;
         }
     </style>
 </head>
 <body>
-    <header id="main-header">
-        <div class="container">
-            <h1>Minecraft Server Hosting</h1>
-        </div>
-    </header>
-
-    <div class="container">
-        <div id="login">
-            <h2>Login</h2>
-            <div class="form-group">
-                <label for="login-email">Email:</label>
-                <input type="email" id="login-email">
-            </div>
-            <div class="form-group">
-                <label for="login-password">Password:</label>
-                <input type="password" id="login-password">
-            </div>
-            <button class="button" onclick="login()">Login</button>
-            <p>New user? <a href="#" onclick="showRegister()">Register here</a></p>
-        </div>
-
-        <div id="register">
-            <h2>Register</h2>
-            <div class="form-group">
-                <label for="register-email">Email:</label>
-                <input type="email" id="register-email">
-            </div>
-            <div class="form-group">
-                <label for="register-password">Password:</label>
-                <input type="password" id="register-password">
-            </div>
-            <button class="button" onclick="register()">Register</button>
-            <p>Already registered? <a href="#" onclick="showLogin()">Login here</a></p>
-        </div>
-
-        <div id="dashboard">
-            <h2>Dashboard</h2>
-            <div class="server-options">
-                <button class="button" onclick="claimFreeServer()">Claim Your Free Server</button>
-            </div>
-            <div id="server-panel">
-                <h3>Server Panel</h3>
-                <p>IP: <span id="server-ip">Op.op.fun</span></p>
-                <button class="button" onclick="startServer()">Start</button>
-                <button class="button" onclick="stopServer()">Stop</button>
-                <button class="button" onclick="restartServer()">Restart</button>
-                <div class="server-files">
-                    <h4>Files</h4>
-                    <button class="button" onclick="uploadFile()">Upload Plugin/World</button>
-                    <button class="button" onclick="deleteFile()">Delete File</button>
-                </div>
-                <div class="server-plugins">
-                    <h4>Plugins</h4>
-                    <button class="button" onclick="downloadPlugin()">Download Plugins</button>
-                </div>
-                <div class="server-startup">
-                    <h4>Startup</h4>
-                    <label for="server-version">Change Version:</label>
-                    <select id="server-version">
-                        <option value="latest">Latest</option>
-                        <option value="1.20.6">1.20.6</option>
-                        <option value="1.20.5">1.20.5</option>
-                        <option value="1.20.4">1.20.4</option>
-                        <!-- Add more versions as needed -->
-                    </select>
-                </div>
-                <div class="server-users">
-                    <h4>Users</h4>
-                    <input type="email" id="add-user-email" placeholder="Enter friend's email">
-                    <button class="button" onclick="addUser()">Add User</button>
-                </div>
-            </div>
-        </div>
+    <div id="game-container">
+        <div id="player" style="top: 50px; left: 50px;"></div>
+        <div id="task">Task: Find the Auto-rickshaw!</div>
+        <div id="auto-rickshaw"></div>
     </div>
-
     <script>
-        function showLogin() {
-            document.getElementById('login').style.display = 'block';
-            document.getElementById('register').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'none';
-        }
+        const player = document.getElementById('player');
+        const autoRickshaw = document.getElementById('auto-rickshaw');
+        const task = document.getElementById('task');
 
-        function showRegister() {
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('register').style.display = 'block';
-            document.getElementById('dashboard').style.display = 'none';
-        }
+        let playerPosition = { top: 50, left: 50 };
 
-        function showDashboard() {
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('register').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-        }
+        document.addEventListener('keydown', (event) => {
+            switch(event.key) {
+                case 'ArrowUp':
+                    playerPosition.top -= 10;
+                    break;
+                case 'ArrowDown':
+                    playerPosition.top += 10;
+                    break;
+                case 'ArrowLeft':
+                    playerPosition.left -= 10;
+                    break;
+                case 'ArrowRight':
+                    playerPosition.left += 10;
+                    break;
+            }
+            player.style.top = playerPosition.top + 'px';
+            player.style.left = playerPosition.left + 'px';
+            checkCollision();
+        });
 
-        function login() {
-            var email = document.getElementById('login-email').value;
-            var password = document.getElementById('login-password').value;
-            // Add your login logic here (e.g., AJAX call to backend)
-            console.log('Logged in with:', email, password);
-            showDashboard();
-        }
+        function checkCollision() {
+            const playerRect = player.getBoundingClientRect();
+            const autoRickshawRect = autoRickshaw.getBoundingClientRect();
 
-        function register() {
-            var email = document.getElementById('register-email').value;
-            var password = document.getElementById('register-password').value;
-            // Add your registration logic here (e.g., AJAX call to backend)
-            console.log('Registered with:', email, password);
-            showLogin();
+            if (playerRect.left < autoRickshawRect.right &&
+                playerRect.right > autoRickshawRect.left &&
+                playerRect.top < autoRickshawRect.bottom &&
+                playerRect.bottom > autoRickshawRect.top) {
+                task.innerText = 'Congratulations! You found the Auto-rickshaw!';
+            }
         }
-
-        function claimFreeServer() {
-            document.getElementById('server-panel').style.display = 'block';
-            // Add your server claiming logic here (e.g., AJAX call to backend)
-        }
-
-        function startServer() {
-            console.log('Server started');
-            // Add your server start logic here (e.g., AJAX call to backend)
-        }
-
-        function stopServer() {
-            console.log('Server stopped');
-            // Add your server stop logic here (e.g., AJAX call to backend)
-        }
-
-        function restartServer() {
-            console.log('Server restarted');
-            // Add your server restart logic here (e.g., AJAX call to backend)
-        }
-
-        function uploadFile() {
-            console.log('File uploaded');
-            // Add your file upload logic here (e.g., AJAX call to backend)
-        }
-
-        function deleteFile() {
-            console.log('File deleted');
-            // Add your file delete logic here (e.g., AJAX call to backend)
-        }
-
-        function downloadPlugin() {
-            console.log('Plugin downloaded');
-            // Add your plugin download logic here (e.g., AJAX call to backend)
-        }
-
-        function addUser() {
-            var email = document.getElementById('add-user-email').value;
-            console.log('User added:', email);
-            // Add your user addition logic here (e.g., AJAX call to backend)
-        }
-
-        // Show login form on page load
-        showLogin();
     </script>
 </body>
 </html>
