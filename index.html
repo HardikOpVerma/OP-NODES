@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Hosting</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        #main-header {
+            background-color: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77b300 3px solid;
+        }
+        #main-header h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 24px;
+        }
+        .button {
+            display: inline-block;
+            color: #fff;
+            background: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background: #77b300;
+        }
+        #login, #register, #dashboard, #server-panel {
+            display: none;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .server-options {
+            margin-top: 20px;
+        }
+        .server-options button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <div class="container">
+            <h1>Minecraft Server Hosting</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="login">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email">
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password">
+            </div>
+            <button class="button" onclick="login()">Login</button>
+            <p>New user? <a href="#" onclick="showRegister()">Register here</a></p>
+        </div>
+
+        <div id="register">
+            <h2>Register</h2>
+            <div class="form-group">
+                <label for="register-email">Email:</label>
+                <input type="email" id="register-email">
+            </div>
+            <div class="form-group">
+                <label for="register-password">Password:</label>
+                <input type="password" id="register-password">
+            </div>
+            <button class="button" onclick="register()">Register</button>
+            <p>Already registered? <a href="#" onclick="showLogin()">Login here</a></p>
+        </div>
+
+        <div id="dashboard">
+            <h2>Dashboard</h2>
+            <div class="server-options">
+                <button class="button" onclick="claimFreeServer()">Claim Your Free Server</button>
+            </div>
+            <div id="server-panel">
+                <h3>Server Panel</h3>
+                <p>IP: <span id="server-ip">Op.op.fun</span></p>
+                <button class="button" onclick="startServer()">Start</button>
+                <button class="button" onclick="stopServer()">Stop</button>
+                <button class="button" onclick="restartServer()">Restart</button>
+                <div class="server-files">
+                    <h4>Files</h4>
+                    <button class="button" onclick="uploadFile()">Upload Plugin/World</button>
+                    <button class="button" onclick="deleteFile()">Delete File</button>
+                </div>
+                <div class="server-plugins">
+                    <h4>Plugins</h4>
+                    <button class="button" onclick="downloadPlugin()">Download Plugins</button>
+                </div>
+                <div class="server-startup">
+                    <h4>Startup</h4>
+                    <label for="server-version">Change Version:</label>
+                    <select id="server-version">
+                        <option value="latest">Latest</option>
+                        <option value="1.20.6">1.20.6</option>
+                        <option value="1.20.5">1.20.5</option>
+                        <option value="1.20.4">1.20.4</option>
+                        <!-- Add more versions as needed -->
+                    </select>
+                </div>
+                <div class="server-users">
+                    <h4>Users</h4>
+                    <input type="email" id="add-user-email" placeholder="Enter friend's email">
+                    <button class="button" onclick="addUser()">Add User</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showLogin() {
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'none';
+        }
+
+        function showRegister() {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('register').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+        }
+
+        function showDashboard() {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        }
+
+        function login() {
+            var email = document.getElementById('login-email').value;
+            var password = document.getElementById('login-password').value;
+            // Add your login logic here (e.g., AJAX call to backend)
+            console.log('Logged in with:', email, password);
+            showDashboard();
+        }
+
+        function register() {
+            var email = document.getElementById('register-email').value;
+            var password = document.getElementById('register-password').value;
+            // Add your registration logic here (e.g., AJAX call to backend)
+            console.log('Registered with:', email, password);
+            showLogin();
+        }
+
+        function claimFreeServer() {
+            document.getElementById('server-panel').style.display = 'block';
+            // Add your server claiming logic here (e.g., AJAX call to backend)
+        }
+
+        function startServer() {
+            console.log('Server started');
+            // Add your server start logic here (e.g., AJAX call to backend)
+        }
+
+        function stopServer() {
+            console.log('Server stopped');
+            // Add your server stop logic here (e.g., AJAX call to backend)
+        }
+
+        function restartServer() {
+            console.log('Server restarted');
+            // Add your server restart logic here (e.g., AJAX call to backend)
+        }
+
+        function uploadFile() {
+            console.log('File uploaded');
+            // Add your file upload logic here (e.g., AJAX call to backend)
+        }
+
+        function deleteFile() {
+            console.log('File deleted');
+            // Add your file delete logic here (e.g., AJAX call to backend)
+        }
+
+        function downloadPlugin() {
+            console.log('Plugin downloaded');
+            // Add your plugin download logic here (e.g., AJAX call to backend)
+        }
+
+        function addUser() {
+            var email = document.getElementById('add-user-email').value;
+            console.log('User added:', email);
+            // Add your user addition logic here (e.g., AJAX call to backend)
+        }
+
+        // Show login form on page load
+        showLogin();
+    </script>
+</body>
+</html>
